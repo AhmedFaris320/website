@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeenlyTutors - Learn and Recite the Holy Quran</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --primary-color: #0f5132;
+            --secondary-color: #d4af37;
+            --accent-color: #e9ecef;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #f9fafb;
+        }
+
+        section {
+            scroll-margin-top: var(--header-height); 
+            padding: 80px 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- Loading Page --- */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-logo {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            animation: pulse 2s infinite;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--accent-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            margin-top: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1002;
+            cursor: pointer;
+        }
+
+        .brand-logo img {
+            height: 65px; 
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-btn-nav {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 8px 25px;
+            border-radius: 50px;
+            transition: background 0.3s;
+        }
+
+        .cta-btn-nav:hover {
+            background-color: #0a3622;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh; 
+            min-height: 600px;
+            background-image: url('https://z-cdn-media.chatglm.cn/files/a0118588-c346-4adf-af9b-953640cf064d.jpg?auth_key=1869062965-a264c0e002654b05b3bf2649eb612e4a-0-573ac203de937b4aa7d9e50666633984');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding-top: var(--header-height);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(15, 81, 50, 0.75), rgba(0, 0, 0, 0.6));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            padding: 12px 35px;
+            border-radius: 5px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .hero-btn:hover { transform: translateY(-3px); }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Floating Sidebar --- */
+        .floating-sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .float-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .float-circle:hover { transform: scale(1.1); }
+        .wa-pk { background-color: #25D366; }
+        .wa-uk { background-color: #20b858; }
+        .fb-link { background-color: #1877F2; }
+        .form-trigger { background-color: var(--primary-color); border: 2px solid var(--white); animation: bounce 2s infinite; }
+        .form-trigger:hover { background-color: var(--secondary-color); color: var(--text-dark); }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-5px);} 60% {transform: translateY(-3px);} }
+
+        /* --- BEAUTIFUL MODAL FORM STYLES --- */
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-box {
+            background-color: var(--white);
+            width: 100%;
+            max-width: 500px;
+            padding: 0;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background-color: var(--primary-color);
+            padding: 20px;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .modal-header h3 { font-size: 1.5rem; margin-bottom: 5px; font-family: 'Amiri', serif; }
+        .modal-header p { font-size: 0.9rem; opacity: 0.8; }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .close-modal-btn:hover { color: var(--secondary-color); }
+
+        .modal-body {
+            padding: 30px 25px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .beautiful-form input, 
+        .beautiful-form select, 
+        .beautiful-form textarea {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background-color: #f9fafb;
+        }
+
+        .beautiful-form input:focus, 
+        .beautiful-form select:focus, 
+        .beautiful-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: var(--white);
+            box-shadow: 0 0 0 3px rgba(15, 81, 50, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-color), #0a3622);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- ACTION MODAL (Pricing Choice) STYLES --- */
+        .action-box {
+            max-width: 420px; /* Smaller width */
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .action-box .modal-body {
+            padding: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .action-choice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .choice-whatsapp {
+            background-color: #25D366;
+            color: white;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        .choice-whatsapp:hover {
+            background-color: #1ebc57;
+            transform: translateY(-2px);
+        }
+
+        .choice-form {
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .choice-form:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .cancel-action {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-decoration: underline;
+        }
+
+        /* --- Content Sections --- */
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 10px; }
+        .section-title p { color: var(--text-light); max-width: 600px; margin: 0 auto; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .feature-card { background: var(--white); padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon { font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 20px; }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .pricing-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: relative; transition: transform 0.3s; border: 1px solid var(--accent-color); display: flex; flex-direction: column; }
+        .pricing-card:hover { transform: scale(1.03); }
+        .pricing-card.popular { border: 2px solid var(--secondary-color); }
+        .badge { position: absolute; top: 15px; right: 15px; background-color: var(--secondary-color); color: var(--text-dark); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+        .price-header { background-color: var(--primary-color); color: var(--white); padding: 30px; text-align: center; }
+        .pricing-card.popular .price-header { background-color: #0a3622; }
+        .price-amount { font-size: 2.5rem; font-weight: 700; font-family: 'Amiri', serif; }
+        .price-body { padding: 30px; flex-grow: 1; }
+        .price-body ul li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .price-footer { padding: 20px 30px; text-align: center; }
+        
+        /* Button style for pricing section */
+        .price-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pricing-card.popular .price-btn { background: var(--primary-color); color: var(--white); }
+        .pricing-card.popular .price-btn:hover { background: var(--secondary-color); border-color: var(--secondary-color); color: var(--text-dark); }
+
+        /* --- Footer --- */
+        footer { background-color: var(--text-dark); color: var(--white); padding: 50px 20px 20px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; margin-bottom: 40px; }
+        .footer-col h4 { color: var(--secondary-color); margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #d1d5db; transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--secondary-color); padding-left: 5px; }
+        .copyright { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); color: #9ca3af; font-size: 0.9rem; }
+
+        /* --- Toast Notification --- */
+        #toast { visibility: hidden; min-width: 250px; background-color: var(--primary-color); color: #fff; text-align: center; border-radius: 5px; padding: 16px; position: fixed; z-index: 30000; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 17px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+                align-items: center;
+                gap: 20px;
+            }
+            .nav-links.active { display: flex; animation: slideDown 0.3s ease; }
+            @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-content p { font-size: 1rem; }
+            .floating-sidebar { right: 10px; top: 85%; }
+            .modal-box { width: 95%; margin: 10px; }
+            .footer-content { gap: 30px; }
+            .nav-container { padding: 0 15px; }
+            .brand-logo img { height: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <img src="https://z-cdn-media.chatglm.cn/files/c7f4d3f4-97ec-4ce9-aff2-31b15d019403.jpeg?auth_key=1869511301-3b1e5283f7514cde9c308a2e7c1e2856-0-a3c44a16f83f9460925803ae570abbe3" alt="DeenlyTutors Logo" class="loader-logo">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast">Request Sent Successfully!</div>
+
+    <!-- Floating Sidebar -->
+    <aside class="floating-sidebar">
+        <a href="https://wa.me/923094383261" target="_blank" class="float-circle wa-pk" data-tooltip="WhatsApp Pakistan"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://wa.me/447305582294" target="_blank" class="float-circle wa-uk" data-tooltip="WhatsApp UK"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61586109643642" target="_blank" class="float-circle fb-link" data-tooltip="Facebook Page"><i class="fa-brands fa-facebook-f"></i></a>
+        <div class="float-circle form-trigger" onclick="openModal()" data-tooltip="Book Presentation"><i class="fa-solid fa-calendar-check"></i></div>
+    </aside>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="brand-logo" onclick="scrollToSection('home')">
+                <img src="https://z-cdn-media.chatglm.cn/files/c7f4d3f4-97ec-4ce9-aff2-31b15d019403.jpeg?auth_key=1869511301-3b1e5283f7514cde9c308a2e7c1e2856-0-a3c44a16f83f9460925803ae570abbe3" alt="DeenlyTutors Logo">
+                <span class="brand-name">DeenlyTutors</span>
+            </div>
+            
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a onclick="scrollToSection('home')" style="cursor:pointer">Home</a></li>
+                    <li><a onclick="scrollToSection('about')" style="cursor:pointer">About</a></li>
+                    <li><a onclick="scrollToSection('pricing')" style="cursor:pointer">Pricing</a></li>
+                    <li><a onclick="openModal(); closeMobileMenu();" class="cta-btn-nav" style="cursor:pointer">Start Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Learn and recite the Holy Quran with proper tajweed and understanding</h1>
+            <p>Professional online tutoring for both adults and kids via Zoom.</p>
+            <button class="hero-btn" onclick="openModal()">Book a Free Presentation</button>
+        </div>
+    </section>
+
+    <!-- Features / Services -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We provide comprehensive Islamic education tailored to your needs.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-book-quran feature-icon"></i>
+                    <h3>Quran with Tajweed</h3>
+                    <p>Learn the correct pronunciation and articulation points of Quranic Arabic.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-eye feature-icon"></i>
+                    <h3>Nazra</h3>
+                    <p>Develop fluency in reading the Holy Quran directly from the text.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-brain feature-icon"></i>
+                    <h3>Hifz</h3>
+                    <p>Structured memorization programs with regular revision for long-term retention.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-users feature-icon"></i>
+                    <h3>Kids & Adults</h3>
+                    <p>Customized learning approaches suitable for young children and adults alike.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" style="background-color: #f3f4f6;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple Pricing Plans</h2>
+                <p>Choose the package that suits your learning goals. Best value for committed learners.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="price-header"><h3>Regular Plan</h3><div class="price-amount">PKR 1,200<span>/class</span></div></div>
+                    <div class="price-body"><ul><li><i class="fa-solid fa-check"></i> Regular learners</li><li><i class="fa-solid fa-check"></i> Flexible schedule</li><li><i class="fa-solid fa-check"></i> One-on-One sessions</li></ul></div>
+                    <div class="price-footer">
+                        <!-- Updated to trigger action modal -->
+                        <button class="price-btn" onclick="openActionModal('https://wa.me/923094383261?text=I%20am%20interested%20in%20the%20Regular%20Plan')">Choose Plan</button>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="badge">Discounted</div>
+                    <div class="price-header"><h3>Package A</h3><div class="price-amount">£45 <span style="font-size:0.8rem">/ 16 Classes</span></div><p style="font-size: 0.9rem; margin-top:5px;">≈ PKR 1,010 per class</p></div>
+                    <div class="price-body"><ul><li><i class="fa-solid fa-check"></i> <strong>16 Classes</strong></li><li><i class="fa-solid fa-check"></i> Clear commitment discount</li><li><i class="fa-solid fa-check"></i> Parents feel strong value</li></ul></div>
+                    <div class="price-footer">
+                        <!-- Updated to trigger action modal -->
+                        <button class="price-btn" onclick="openActionModal('https://wa.me/923094383261?text=I%20am%20interested%20in%20the%2016%20Class%20Package')">Enroll Now</button>
+                    </div>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="badge">Best Value ⭐⭐</div>
+                    <div class="price-header"><h3>Package B</h3><div class="price-amount">£50 <span style="font-size:0.8rem">/ 20 Classes</span></div><p style="font-size: 0.9rem; margin-top:5px;">≈ PKR 900 per class</p></div>
+                    <div class="price-body"><ul><li><i class="fa-solid fa-check"></i> <strong>20 Classes</strong></li><li><i class="fa-solid fa-check"></i> Lowest price per class</li><li><i class="fa-solid fa-check"></i> Best for Hifz/Tajweed</li></ul></div>
+                    <div class="price-footer">
+                        <!-- Updated to trigger action modal -->
+                        <button class="price-btn" onclick="openActionModal('https://wa.me/923094383261?text=I%20am%20interested%20in%20the%20Best%20Value%20Package')">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col"><h4>DeenlyTutors</h4><p>Spreading the light of Quran education globally through professional online tutoring.</p></div>
+            <div class="footer-col"><h4>Contact Us</h4><ul><li><i class="fa-brands fa-whatsapp"></i> PK: +92 309 4383261</li><li><i class="fa-brands fa-whatsapp"></i> UK: +44 7305 582294</li><li><i class="fa-solid fa-envelope"></i> info@deenlytutors.com</li></ul></div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div style="display: flex; gap: 15px; font-size: 1.5rem;">
+                    <a href="https://www.facebook.com/profile.php?id=61586109643642" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright"><p>&copy; 2024 DeenlyTutors. All rights reserved.</p></div>
+    </footer>
+
+    <!-- 1. MAIN BOOKING FORM MODAL -->
+    <div id="leadModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span class="close-modal-btn" onclick="closeModal()">&times;</span>
+                <h3>Start Your Journey</h3>
+                <p>Fill out the form below to book a free presentation.</p>
+            </div>
+            <div class="modal-body">
+                <form class="beautiful-form" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number (WhatsApp)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" placeholder="+92 3XX XXXXXXX" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-book-open"></i>
+                            <select required>
+                                <option value="" disabled selected>Choose a Course...</option>
+                                <option value="Nazra">Nazra (Quran Reading)</option>
+                                <option value="Hifz">Hifz (Memorization)</option>
+                                <option value="Tajweed">Tajweed (Pronunciation)</option>
+                                <option value="Islamic Studies">Islamic Studies</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Student Age Group</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-child-reaching"></i>
+                            <select>
+                                <option value="" disabled selected>Select Age...</option>
+                                <option value="Kids (4-12)">Kids (4-12 Years)</option>
+                                <option value="Teens (13-17)">Teens (13-17 Years)</option>
+                                <option value="Adults (18+)">Adults (18+ Years)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Submit Request <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. PRICING ACTION MODAL (WhatsApp vs Form) -->
+    <div id="actionModal" class="modal-overlay">
+        <div class="modal-box action-box">
+            <div class="modal-header">
+                <span class="close-modal-btn" onclick="closeActionModal()">&times;</span>
+                <h3>How would you like to proceed?</h3>
+                <p>Choose your preferred contact method.</p>
+            </div>
+            <div class="modal-body">
+                <div class="action-buttons">
+                    <button class="action-choice choice-whatsapp" onclick="goToWhatsapp()">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <div>Chat on WhatsApp</div>
+                            <span style="font-size: 0.8rem; opacity: 0.9; font-weight: 400;">Instant Response</span>
+                        </div>
+                    </button>
+                    
+                    <button class="action-choice choice-form" onclick="goToForm()">
+                        <i class="fa-solid fa-file-pen" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <div>Fill Booking Form</div>
+                            <span style="font-size: 0.8rem; opacity: 0.9; font-weight: 400;">Detailed Inquiry</span>
+                        </div>
+                    </button>
+                </div>
+                <button class="cancel-action" onclick="closeActionModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- LOADER REMOVAL ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loading-screen');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.remove();
+            }, 500);
+        });
+
+        // --- SCROLLING SCRIPT ---
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // --- VARIABLES ---
+        let targetWhatsappUrl = "";
+        const leadModal = document.getElementById('leadModal');
+        const actionModal = document.getElementById('actionModal');
+
+        // --- LEAD FORM FUNCTIONS (Main Booking Form) ---
+        function openModal() {
+            leadModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            leadModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // --- ACTION MODAL FUNCTIONS (Pricing Options) ---
+        function openActionModal(url) {
+            targetWhatsappUrl = url; // Save the specific plan URL
+            actionModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeActionModal() {
+            actionModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Logic for the buttons inside the Action Modal
+        function goToWhatsapp() {
+            if (targetWhatsappUrl) {
+                window.open(targetWhatsappUrl, '_blank');
+            }
+            closeActionModal();
+        }
+
+        function goToForm() {
+            closeActionModal(); // Close the choice popup
+            openModal();        // Open the main form
+        }
+
+        // --- GLOBAL CLICK LISTENERS ---
+        // Close modals when clicking outside the box
+        window.onclick = function(event) {
+            if (event.target == leadModal) {
+                closeModal();
+            }
+            if (event.target == actionModal) {
+                closeActionModal();
+            }
+        }
+
+        // --- Mobile Menu Functions ---
+        function toggleMobileMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
+
+        function closeMobileMenu() {
+            const nav = document.getElementById("navLinks");
+            if (nav.classList.contains("active")) {
+                nav.classList.remove("active");
+            }
+        }
+
+        // --- Handle Form Submit ---
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const toast = document.getElementById("toast");
+            const form = e.target;
+            
+            closeModal();
+            form.reset();
+            
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    </script>
+</body>
+</html>
