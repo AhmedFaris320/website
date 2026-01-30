@@ -266,8 +266,7 @@
         }
 
         .float-circle:hover { transform: scale(1.1); }
-        .wa-pk { background-color: #25D366; }
-        .wa-uk { background-color: #20b858; }
+        .wa-uk { background-color: #25D366; }
         .fb-link { background-color: #1877F2; }
         .form-trigger { background-color: var(--primary-color); border: 2px solid var(--white); animation: bounce 2s infinite; }
         .form-trigger:hover { background-color: var(--secondary-color); color: var(--text-dark); }
@@ -577,10 +576,10 @@
 
     <!-- Floating Sidebar -->
     <aside class="floating-sidebar">
-        <a href="https://wa.me/923094383261" target="_blank" class="float-circle wa-pk" data-tooltip="WhatsApp Pakistan"><i class="fa-brands fa-whatsapp"></i></a>
+        <!-- Removed Pakistan WhatsApp, kept UK -->
         <a href="https://wa.me/447305582294" target="_blank" class="float-circle wa-uk" data-tooltip="WhatsApp UK"><i class="fa-brands fa-whatsapp"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61586109643642" target="_blank" class="float-circle fb-link" data-tooltip="Facebook Page"><i class="fa-brands fa-facebook-f"></i></a>
-        <div class="float-circle form-trigger" onclick="openModal()" data-tooltip="Book Presentation"><i class="fa-solid fa-calendar-check"></i></div>
+        <div class="float-circle form-trigger" onclick="openModal()" data-tooltip="Book Free Trial"><i class="fa-solid fa-calendar-check"></i></div>
     </aside>
 
     <!-- Header -->
@@ -611,8 +610,8 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Learn and recite the Holy Quran with proper tajweed and understanding</h1>
-            <p>Professional online tutoring for both adults and kids via Zoom.</p>
-            <button class="hero-btn" onclick="openModal()">Book a Free Presentation</button>
+            <p>Professional online tutoring for both adults and kids via Zoom & Google Meet.</p>
+            <button class="hero-btn" onclick="openModal()">Book a Free Trial for 30 mins</button>
         </div>
     </section>
 
@@ -621,7 +620,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Our Services</h2>
-                <p>We provide comprehensive Islamic education tailored to your needs.</p>
+                <p>We provide comprehensive Islamic education with a focus on Tarbiyah.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
@@ -640,9 +639,14 @@
                     <p>Structured memorization programs with regular revision for long-term retention.</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fa-solid fa-users feature-icon"></i>
-                    <h3>Kids & Adults</h3>
-                    <p>Customized learning approaches suitable for young children and adults alike.</p>
+                    <i class="fa-solid fa-certificate feature-icon"></i>
+                    <h3>Certificates</h3>
+                    <p>Receive a recognized certificate upon successful completion of your course.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-hand-holding-heart feature-icon"></i>
+                    <h3>Tarbiyah Focus</h3>
+                    <p>We focus on Tarbiyah (moral upbringing) during one-to-one classes on Zoom and Google Meet.</p>
                 </div>
             </div>
         </div>
@@ -653,33 +657,34 @@
         <div class="container">
             <div class="section-title">
                 <h2>Simple Pricing Plans</h2>
-                <p>Choose the package that suits your learning goals. Best value for committed learners.</p>
+                <p>Choose the package that suits your learning goals. All prices in GBP (£).</p>
             </div>
             <div class="pricing-grid">
+                <!-- Replaced Regular Plan PKR with a GBP equivalent plan -->
                 <div class="pricing-card">
-                    <div class="price-header"><h3>Regular Plan</h3><div class="price-amount">PKR 1,200<span>/class</span></div></div>
+                    <div class="price-header"><h3>Regular Plan</h3><div class="price-amount">£5<span>/class</span></div></div>
                     <div class="price-body"><ul><li><i class="fa-solid fa-check"></i> Regular learners</li><li><i class="fa-solid fa-check"></i> Flexible schedule</li><li><i class="fa-solid fa-check"></i> One-on-One sessions</li></ul></div>
                     <div class="price-footer">
-                        <!-- Updated to trigger action modal -->
-                        <button class="price-btn" onclick="openActionModal('https://wa.me/923094383261?text=I%20am%20interested%20in%20the%20Regular%20Plan')">Choose Plan</button>
+                        <!-- Updated to UK number -->
+                        <button class="price-btn" onclick="openActionModal('https://wa.me/447305582294?text=I%20am%20interested%20in%20the%20Regular%20Plan')">Choose Plan</button>
                     </div>
                 </div>
                 <div class="pricing-card">
                     <div class="badge">Discounted</div>
-                    <div class="price-header"><h3>Package A</h3><div class="price-amount">£45 <span style="font-size:0.8rem">/ 16 Classes</span></div><p style="font-size: 0.9rem; margin-top:5px;">≈ PKR 1,010 per class</p></div>
+                    <div class="price-header"><h3>Package A</h3><div class="price-amount">£45 <span style="font-size:0.8rem">/ 16 Classes</span></div></div>
                     <div class="price-body"><ul><li><i class="fa-solid fa-check"></i> <strong>16 Classes</strong></li><li><i class="fa-solid fa-check"></i> Clear commitment discount</li><li><i class="fa-solid fa-check"></i> Parents feel strong value</li></ul></div>
                     <div class="price-footer">
-                        <!-- Updated to trigger action modal -->
-                        <button class="price-btn" onclick="openActionModal('https://wa.me/923094383261?text=I%20am%20interested%20in%20the%2016%20Class%20Package')">Enroll Now</button>
+                        <!-- Updated to UK number -->
+                        <button class="price-btn" onclick="openActionModal('https://wa.me/447305582294?text=I%20am%20interested%20in%20the%2016%20Class%20Package')">Enroll Now</button>
                     </div>
                 </div>
                 <div class="pricing-card popular">
                     <div class="badge">Best Value ⭐⭐</div>
-                    <div class="price-header"><h3>Package B</h3><div class="price-amount">£50 <span style="font-size:0.8rem">/ 20 Classes</span></div><p style="font-size: 0.9rem; margin-top:5px;">≈ PKR 900 per class</p></div>
+                    <div class="price-header"><h3>Package B</h3><div class="price-amount">£50 <span style="font-size:0.8rem">/ 20 Classes</span></div></div>
                     <div class="price-body"><ul><li><i class="fa-solid fa-check"></i> <strong>20 Classes</strong></li><li><i class="fa-solid fa-check"></i> Lowest price per class</li><li><i class="fa-solid fa-check"></i> Best for Hifz/Tajweed</li></ul></div>
                     <div class="price-footer">
-                        <!-- Updated to trigger action modal -->
-                        <button class="price-btn" onclick="openActionModal('https://wa.me/923094383261?text=I%20am%20interested%20in%20the%20Best%20Value%20Package')">Get Started</button>
+                        <!-- Updated to UK number -->
+                        <button class="price-btn" onclick="openActionModal('https://wa.me/447305582294?text=I%20am%20interested%20in%20the%20Best%20Value%20Package')">Get Started</button>
                     </div>
                 </div>
             </div>
@@ -690,7 +695,14 @@
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-col"><h4>DeenlyTutors</h4><p>Spreading the light of Quran education globally through professional online tutoring.</p></div>
-            <div class="footer-col"><h4>Contact Us</h4><ul><li><i class="fa-brands fa-whatsapp"></i> PK: +92 309 4383261</li><li><i class="fa-brands fa-whatsapp"></i> UK: +44 7305 582294</li><li><i class="fa-solid fa-envelope"></i> info@deenlytutors.com</li></ul></div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <!-- Removed Pakistan WhatsApp, kept UK -->
+                    <li><i class="fa-brands fa-whatsapp"></i> UK: +44 7305 582294</li>
+                    <li><i class="fa-solid fa-envelope"></i> info@deenlytutors.com</li>
+                </ul>
+            </div>
             <div class="footer-col">
                 <h4>Follow Us</h4>
                 <div style="display: flex; gap: 15px; font-size: 1.5rem;">
@@ -707,7 +719,7 @@
             <div class="modal-header">
                 <span class="close-modal-btn" onclick="closeModal()">&times;</span>
                 <h3>Start Your Journey</h3>
-                <p>Fill out the form below to book a free presentation.</p>
+                <p>Fill out the form below to book a free trial for 30 mins.</p>
             </div>
             <div class="modal-body">
                 <form class="beautiful-form" onsubmit="handleFormSubmit(event)">
@@ -722,7 +734,7 @@
                         <label>Phone Number (WhatsApp)</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="tel" placeholder="+92 3XX XXXXXXX" required>
+                            <input type="tel" placeholder="+44 7XXX XXXXXX" required>
                         </div>
                     </div>
                     <div class="form-group">
