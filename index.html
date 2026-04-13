@@ -281,7 +281,7 @@
 
         /* --- BEAUTIFUL MODAL FORM STYLES --- */
         .modal-overlay {
-            display: none; /* Hidden by default */
+            display: none;
             position: fixed;
             z-index: 10000;
             left: 0;
@@ -420,7 +420,7 @@
 
         /* --- ACTION MODAL (Pricing Choice) STYLES --- */
         .action-box {
-            max-width: 420px; /* Smaller width */
+            max-width: 420px;
             text-align: center;
             padding-bottom: 20px;
         }
@@ -507,7 +507,6 @@
         .price-body ul li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
         .price-footer { padding: 20px 30px; text-align: center; }
         
-        /* Button style for pricing section */
         .price-btn {
             display: block;
             width: 100%;
@@ -583,7 +582,6 @@
     <!-- Floating Sidebar -->
     <aside class="floating-sidebar">
         <a href="https://wa.me/447774874052" target="_blank" class="float-circle wa-uk" data-tooltip="WhatsApp UK"><i class="fa-brands fa-whatsapp"></i></a>
-        <!-- Instagram Link -->
         <a href="https://www.instagram.com/deenly.online?igsh=a2w0eXh0aTR3bjRm" target="_blank" class="float-circle insta-link" data-tooltip="Instagram"><i class="fa-brands fa-instagram"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61586109643642" target="_blank" class="float-circle fb-link" data-tooltip="Facebook Page"><i class="fa-brands fa-facebook-f"></i></a>
         <div class="float-circle form-trigger" onclick="openModal()" data-tooltip="Book Demo Class"><i class="fa-solid fa-calendar-check"></i></div>
@@ -645,19 +643,16 @@
                     <h3>Hifz</h3>
                     <p>Structured memorization programs with regular revision for long-term retention.</p>
                 </div>
-                <!-- New: One to One Classes -->
                 <div class="feature-card">
                     <i class="fa-solid fa-chalkboard-user feature-icon"></i>
                     <h3>One to One Classes</h3>
                     <p>Interactive sessions on Zoom & Google Meet focusing on individual attention and Tarbiyah.</p>
                 </div>
-                <!-- New: Parent Consultation -->
                 <div class="feature-card">
                     <i class="fa-solid fa-comments feature-icon"></i>
                     <h3>Parent Consultation</h3>
                     <p>Weekly meetings with parents to discuss student progress and improvement plans.</p>
                 </div>
-                <!-- Additional point: Certificates -->
                 <div class="feature-card">
                     <i class="fa-solid fa-certificate feature-icon"></i>
                     <h3>Certificates</h3>
@@ -675,7 +670,6 @@
                 <p>Choose the package that suits your learning goals. All prices in GBP (£).</p>
             </div>
             <div class="pricing-grid">
-                <!-- Updated Standard Plan: 30 pounds, 8 classes, 30 min each -->
                 <div class="pricing-card">
                     <div class="price-header"><h3>Standard Plan</h3><div class="price-amount">£30 <span style="font-size:0.8rem">/ 8 Classes</span></div></div>
                     <div class="price-body">
@@ -740,33 +734,33 @@
                 <p>Fill out the form below to book a demo class for 30 min.</p>
             </div>
             <div class="modal-body">
-                <form class="beautiful-form" onsubmit="handleFormSubmit(event)">
+                <form class="beautiful-form" action="https://formspree.io/f/xojjdbgv" method="POST" onsubmit="handleFormSubmit(event)">
                     <div class="form-group">
                         <label>Full Name</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-user"></i>
-                            <input type="text" placeholder="Enter your name" required>
+                            <input type="text" name="name" placeholder="Enter your name" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Phone Number (WhatsApp)</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="tel" placeholder="+44 7XXX XXXXXX" required>
+                            <input type="tel" name="phone" placeholder="+44 7XXX XXXXXX" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Email Address</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-envelope"></i>
-                            <input type="email" placeholder="you@example.com" required>
+                            <input type="email" name="email" placeholder="you@example.com" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Select Course</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-book-open"></i>
-                            <select required>
+                            <select name="course" required>
                                 <option value="" disabled selected>Choose a Course...</option>
                                 <option value="Nazra">Nazra (Quran Reading)</option>
                                 <option value="Hifz">Hifz (Memorization)</option>
@@ -779,7 +773,7 @@
                         <label>Student Age Group</label>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-child-reaching"></i>
-                            <select>
+                            <select name="age_group">
                                 <option value="" disabled selected>Select Age...</option>
                                 <option value="Kids (4-12)">Kids (4-12 Years)</option>
                                 <option value="Teens (13-17)">Teens (13-17 Years)</option>
@@ -862,7 +856,7 @@
 
         // --- ACTION MODAL FUNCTIONS (Pricing Options) ---
         function openActionModal(url) {
-            targetWhatsappUrl = url; // Save the specific plan URL
+            targetWhatsappUrl = url;
             actionModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -872,7 +866,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Logic for the buttons inside the Action Modal
         function goToWhatsapp() {
             if (targetWhatsappUrl) {
                 window.open(targetWhatsappUrl, '_blank');
@@ -881,12 +874,11 @@
         }
 
         function goToForm() {
-            closeActionModal(); // Close the choice popup
-            openModal();        // Open the main form
+            closeActionModal();
+            openModal();
         }
 
         // --- GLOBAL CLICK LISTENERS ---
-        // Close modals when clicking outside the box
         window.onclick = function(event) {
             if (event.target == leadModal) {
                 closeModal();
@@ -908,17 +900,40 @@
             }
         }
 
-        // --- Handle Form Submit ---
-        function handleFormSubmit(e) {
+        // --- Handle Form Submit --- THIS IS THE FIX
+        async function handleFormSubmit(e) {
             e.preventDefault();
             const toast = document.getElementById("toast");
             const form = e.target;
-            
-            closeModal();
-            form.reset();
-            
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalBtnHTML = submitBtn.innerHTML;
+
+            // Show loading state on button
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            // Actually send data to Formspree
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            // Reset button
+            submitBtn.innerHTML = originalBtnHTML;
+            submitBtn.disabled = false;
+
+            if (response.ok) {
+                // Success - close modal, reset form, show toast
+                closeModal();
+                form.reset();
+                toast.className = "show";
+                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+            } else {
+                // Error - alert the user
+                alert("Something went wrong. Please try again or contact us on WhatsApp.");
+            }
         }
     </script>
 </body>
